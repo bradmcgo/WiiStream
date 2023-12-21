@@ -153,7 +153,6 @@ explicit =
 # HTTP request timeout in seconds
 timeout = 10
   ```
-
   - Make it executable with `chmod +x /etc/init.d/c_mopidy` and enable defaults with `update-rc.d c_mopidy defaults`.
 - Create the 'mopidy' user and configure permissions:
   ```
