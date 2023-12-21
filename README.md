@@ -177,4 +177,4 @@ This guide details the steps for installing WiiStream on your Nintendo Wii. Foll
 
 ## Starting Mopidy
 Power on the Wii to start the Mopidy music server.
-Connect to Mopidy via the IPaddress:6680 e.g. 192.168.30.10:6680
+Connect to Mopidy in a browser on another device via the Wii's IP address over port 6680, e.g. http://192.168.30.10:6680
