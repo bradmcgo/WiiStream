@@ -33,7 +33,7 @@ This guide details the steps for installing WiiStream on your Nintendo Wii. Foll
   - Ignore the prompt about 'reinit your bootloader'.
 
 ### 3. Wii Setup
-- Connect a USB keyboard to the back of the Wii, using the port at the bottom when the Wii is horizontal.
+- Connect a USB keyboard to the back of the Wii, using the USB port at the bottom when the Wii is horizontal.
 - Insert the SD card into the Wii and turn it on.
 - Log in with 'root' as both the username and password.
 
