@@ -4,7 +4,7 @@
 This guide details the steps for installing WiiStream on your Nintendo Wii. Follow each step closely for a successful setup.
 
 ## Prerequisites
-- A Nintendo Wii
+- A Nintendo Wii matching one of the model numbers [here] (https://mariokartwii.com/showthread.php?tid=17)
 - An SD card
 - A PC with internet access
 - A USB keyboard
