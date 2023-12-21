@@ -177,4 +177,3 @@ This guide details the steps for installing WiiStream on your Nintendo Wii. Foll
 
 ## Starting Mopidy
 Type `mopidy` in the terminal to start the Mopidy music server.
-```
