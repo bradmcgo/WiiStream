@@ -81,6 +81,79 @@ This guide details the steps for installing WiiStream on your Nintendo Wii. Foll
 ### 9. Configure Mopidy
 - Create and configure the Mopidy service file with `nano /etc/init.d/c_mopidy`.
   - Paste the provided script, save and exit.
+  ```
+[local]
+enabled = true
+data_dir = /var/lib/mopidy/local
+media_dir = /var/lib/mopidy/media
+playlists_dir = /var/lib/mopidy/playlists
+
+[audio]
+output = pulsesink server=127.0.0.1
+
+[stream]
+enabled = true
+protocols =
+    http
+    https
+    mms
+    rtmp
+    rtmps
+    rtsp
+timeout = 5000
+metadata_blacklist =
+
+[mpd]
+enabled = true
+hostname = 0.0.0.0
+port = 6600
+
+[http]
+enabled = true
+hostname = 0.0.0.0
+port = 6680
+[tunein]
+timeout = 5000
+
+[podcast-itunes]
+enabled = true
+# iTunes Store base URL
+base_url = http://itunes.apple.com/
+
+# user-friendly name for browsing the iTunes Store
+root_name = iTunes Store
+
+# format string for genre results; field names: id, name, url
+genre_format = {name}
+
+# format string for podcast results; field names: collectionId,
+# collectionName, country, kind, trackCount
+podcast_format = {collectionName}
+
+# format string for episode results; field names: collectionId,
+# collectionName, country, episodeContentType, episodeFileExtension,
+# episodeGuid, kind, releaseDate, trackId, trackName
+episode_format = {trackName} [{collectionName}]
+
+# charts to display when browsing; possible values: "Podcasts",
+# "AudioPodcasts", "VideoPodcasts"
+charts = AudioPodcasts
+
+# directory name to display for browsing charts of a genre/category
+# with subgenres; field names as for 'genre_format'
+charts_format = All {name}
+
+# ISO country code for the iTunes Store you want to use
+country = US
+
+# whether you want to include explicit content in your search
+# results; possible values: "Yes", "No", or store default (blank)
+explicit = 
+
+# HTTP request timeout in seconds
+timeout = 10
+  ```
+
   - Make it executable with `chmod +x /etc/init.d/c_mopidy` and enable defaults with `update-rc.d c_mopidy defaults`.
 - Create the 'mopidy' user and configure permissions:
   ```
