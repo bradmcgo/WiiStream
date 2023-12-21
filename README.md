@@ -56,3 +56,53 @@ This guide details the steps for installing WiiStream on your Nintendo Wii. Foll
 
 ### 7. Create Swap File
 - Execute the following commands to create a swap file:
+  ```
+  dd if=/dev/zero of=/swapfile bs=1M count=5120
+  chmod 600 /swapfile
+  mkswap /swapfile
+  swapon /swapfile
+  nano /etc/fstab
+  ```
+  - Add `/swapfile none swap sw 0 0` to the file and save.
+
+### 8. Install Mopidy and Dependencies
+- Run `apt update`.
+- Install required packages:
+  ```
+  apt-get install python curl python-dev python-pip gstreamer0.10-alsa gstreamer0.10-pulseaudio python-gst0.10 gstreamer0.10-plugins-good gstreamer0.10-plugins-ugly gstreamer0.10-tools pulseaudio python-pykka python-gi
+  ```
+- Install Mopidy and related components:
+  ```
+  curl https://bootstrap.pypa.io/pip/2.7/get-pip.py -o get-pip.py
+  python get-pip.py
+  pip install Mopidy==0.19.0 Mopidy-MusicBox-Webclient==2.0.0 Mopidy-TuneIn==0.1.3 Mopidy-Podcast-iTunes==1.0.0 --no-deps
+  ```
+
+### 9. Configure Mopidy
+- Create and configure the Mopidy service file with `nano /etc/init.d/c_mopidy`.
+  - Paste the provided script, save and exit.
+  - Make it executable with `chmod +x /etc/init.d/c_mopidy` and enable defaults with `update-rc.d c_mopidy defaults`.
+- Create the 'mopidy' user and configure permissions:
+  ```
+  adduser mopidy
+  usermod -a -G audio mopidy
+  usermod -a -G audio pulse
+  ```
+- Configure PulseAudio:
+  - Edit `nano /etc/pulse/system.pa`.
+  - Add `load-module module-native-protocol-tcp auth-ip-acl=127.0.0.1 auth-anonymous=1` at the end.
+
+### 10. Final Steps
+- Create Mopidy configuration directory and file:
+  ```
+  mkdir /etc/mopidy
+  nano /etc/mopidy/mopidy.conf
+  ```
+  - Paste the provided configuration, save and exit.
+- Modify system behavior for shutdown in `nano /etc/inittab`.
+  - Change the line starting with 'ca:12345:ctrlaltdel' as instructed.
+- Power off the Wii to apply changes.
+
+## Starting Mopidy
+Type `mopidy` in the terminal to start the Mopidy music server.
+```
