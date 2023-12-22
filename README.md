@@ -62,7 +62,7 @@ This guide details the steps for installing WiiStream on your Nintendo Wii. Foll
   - The password is 'root' (input is invisible).
 
 ### 7. Create Swap File
-- Execute the following commands to create a swap file:
+- Execute the following commands to create a swap file. The first command may take a while:
   ```
   dd if=/dev/zero of=/swapfile bs=1M count=5120
   chmod 600 /swapfile
