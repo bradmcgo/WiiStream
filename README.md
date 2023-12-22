@@ -70,7 +70,7 @@ This guide details the steps for installing WiiStream on your Nintendo Wii. Foll
   swapon /swapfile
   nano /etc/fstab
   ```
-  - Add `/swapfile none swap sw 0 0` to the file and save.
+  - Add `/swapfile none swap sw 0 0` to the end of the file and save.
 
 ### 8. Install Mopidy and Dependencies
 - Run `apt update`.
