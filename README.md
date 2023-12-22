@@ -36,6 +36,8 @@ This guide details the steps for installing WiiStream on your Nintendo Wii. Foll
 ### 3. Wii Setup
 - Connect a USB keyboard to the back of the Wii, using the USB port at the bottom when the Wii is horizontal.
 - Insert the SD card into the Wii and turn it on.
+- Wait for the Gumboot menu to boot into the first option (wii-linux-ngx) after 30 seconds.
+- Wait for wii-linux-ngx to boot up.
 - Log in with 'root' as both the username and password.
 
 ### 4. Configure Network on Wii
