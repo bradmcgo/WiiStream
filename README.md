@@ -90,7 +90,7 @@ This guide details the steps for installing WiiStream on your Nintendo Wii. Foll
 - Create and configure the Mopidy service file with `nano /etc/init.d/c_mopidy`.
   - Paste the provided script, save and exit.
   ```
-    #!/bin/sh
+  #!/bin/sh
 
   ### BEGIN INIT INFO
   # Provides:          mopidy
