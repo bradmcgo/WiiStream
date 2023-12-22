@@ -212,10 +212,10 @@ This guide details the steps for installing WiiStream on your Nintendo Wii. Foll
   ```
   - Make it executable with `chmod +x /etc/init.d/c_mopidy` and enable defaults with `update-rc.d c_mopidy defaults`.
 - Create the 'mopidy' user and configure permissions:
+  Use any password. Leave the remaining fields blank during this step.
   ```
   adduser mopidy
   ```
-  Use any password. Leave the remaining fields blank during this step.
   ```
   usermod -a -G audio mopidy
   usermod -a -G audio pulse
