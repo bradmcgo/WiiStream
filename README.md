@@ -42,6 +42,9 @@ This guide details the steps for installing WiiStream on your Nintendo Wii. Foll
 
 ### 4. Configure Network on Wii
 - At the prompt, enter `./whiite-ez-wifi-config` and follow the instructions for WiFi setup.
+  - Ensure you use 'WPA-PSK' as your WLAN Security Mode.
+  - Select 'Yes' when prompted to bring up your WiFi connection.
+  - Select 'No' after it fails to bring the connection up.
 - Edit network interfaces with `nano '/etc/network/interfaces'`.
   - Change 'wlan0' to 'wlan1'.
   - Save and exit (Ctrl-X, Y, Enter).
