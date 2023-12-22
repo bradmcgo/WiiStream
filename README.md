@@ -83,7 +83,8 @@ This guide details the steps for installing WiiStream on your Nintendo Wii. Foll
   ```
   curl https://bootstrap.pypa.io/pip/2.7/get-pip.py -o get-pip.py
   python get-pip.py
-  pip install Mopidy==0.19.0 Mopidy-MusicBox-Webclient==2.0.0 Mopidy-TuneIn==0.1.3 Mopidy-Podcast-iTunes==1.0.0 --no-deps
+  pip install Mopidy==0.19.0
+  pip install Mopidy-MusicBox-Webclient==2.0.0 Mopidy-TuneIn==0.1.3 Mopidy-Podcast-iTunes==1.0.0 --no-deps
   ```
 
 ### 9. Configure Mopidy
