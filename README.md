@@ -29,7 +29,7 @@ This guide details the steps for installing WiiStream on your Nintendo Wii. Foll
   - Click 'CLOSE' when it shows 'READY'.
 - Open Paragon Partition Manager.
   - Select the partition named "WII-LINUX-NGX" (usually the middle partition).
-  - Click 'Expand', follow the prompts, and wait for completion.
+  - Click 'Expand', follow the prompts, select 'Expand Now', and wait for completion.
   - Ignore the prompt about 'reinit your bootloader'.
 
 ### 3. Wii Setup
