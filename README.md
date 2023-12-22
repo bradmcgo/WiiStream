@@ -89,6 +89,146 @@ This guide details the steps for installing WiiStream on your Nintendo Wii. Foll
 - Create and configure the Mopidy service file with `nano /etc/init.d/c_mopidy`.
   - Paste the provided script, save and exit.
   ```
+    #!/bin/sh
+
+  ### BEGIN INIT INFO
+  # Provides:          mopidy
+  # Required-Start:    $network $remote_fs
+  # Required-Stop:     $network $remote_fs
+  # Should-Start:      $named alsa-utils avahi dbus
+  # Should-Stop:       $named alsa-utils avahi dbus
+  # Default-Start:     2 3 4 5
+  # Default-Stop:      0 1 6
+  # Short-Description: Mopidy music server
+  ### END INIT INFO
+  
+  PATH=/sbin:/usr/sbin:/bin:/usr/bin:/usr/local/bin:/var/log
+  DESC="Mopidy music server"
+  NAME=mopidy
+  DAEMON=/usr/local/bin/mopidy
+  DAEMON_USER=mopidy
+  DAEMON_GROUP=audio
+  CONFIG_FILES="/usr/share/mopidy/conf.d:/etc/mopidy/mopidy.conf"
+  PIDFILE=/var/run/$NAME.pid
+  SCRIPTNAME=/etc/init.d/$NAME
+  
+  # Load the VERBOSE setting and other rcS variables
+  . /lib/init/vars.sh
+  
+  # Define LSB log_* functions.
+  . /lib/lsb/init-functions
+  
+  start_pulseaudio() {
+        # Start pulseaudio in system-wide mode
+        /usr/bin/pulseaudio --system --daemonize >> /var$
+        sleep 5  # Give pulseaudio a couple of seconds to initialize
+  }
+  
+  do_start()
+  {
+      start_pulseaudio # Add this line to ensure pulseaudio is running before starting mopidy
+  
+      start-stop-daemon --start --quiet --name $NAME --pidfile $PIDFILE \
+          --startas $DAEMON --test > /dev/null \
+          || return 1
+      start-stop-daemon --start --quiet --name $NAME --pidfile $PIDFILE \
+          --chuid $DAEMON_USER:$DAEMON_GROUP --background --make-pidfile \
+          --startas $DAEMON -- --quiet --config $CONFIG_FILES \
+          >> /var/log/mopidy.log 2>&1 \
+          || return 2
+      sleep 5
+      #killall pulseaudio #For some reason, audio seems to have issues when started in system-wide mode. Pulseaudio will autospawn when playing something in Mopidy after its killed by this command. Audio will then function as expected.
+  }
+  
+  do_stop()
+  {
+      start-stop-daemon --stop --quiet --name $NAME --pidfile $PIDFILE \
+          --retry=TERM/30/KILL/5
+      RETVAL="$?"
+      [ "$RETVAL" = 2 ] && return 2
+      # Wait for children to finish too if this is a daemon that forks
+      # and if the daemon is only ever run from this initscript.
+      # This typically happens with pulseaudio.
+      start-stop-daemon --stop --quiet --oknodo --user $DAEMON_USER \
+          --retry=TERM/30/KILL/5
+      [ "$?" = 2 ] && return 2
+      rm -f $PIDFILE
+      return "$RETVAL"
+  }
+  
+  # Remove the action from $@ before it is used by the run action
+  action=$1
+  [ "$action" != "" ] && shift
+  
+  case "$action" in
+      start)
+          [ "$VERBOSE" != no ] && log_daemon_msg "Starting $DESC " "$NAME"
+          do_start
+          case "$?" in
+              0|1) [ "$VERBOSE" != no ] && log_end_msg 0 ;;
+              2)   [ "$VERBOSE" != no ] && log_end_msg 1 ;;
+          esac
+          ;;
+      stop)
+          [ "$VERBOSE" != no ] && log_daemon_msg "Stopping $DESC" "$NAME"
+          do_stop
+          case "$?" in
+              0|1) [ "$VERBOSE" != no ] && log_end_msg 0 ;;
+              2)   [ "$VERBOSE" != no ] && log_end_msg 1 ;;
+          esac
+          ;;
+      status)
+          status_of_proc "$DAEMON" "$NAME" && exit 0 || exit $?
+          ;;
+      restart|force-reload)
+          log_daemon_msg "Restarting $DESC" "$NAME"
+          do_stop
+          case "$?" in
+              0|1)
+                  do_start
+                  case "$?" in
+                      0) log_end_msg 0 ;;
+                      1) log_end_msg 1 ;; # Old process is still running
+                      *) log_end_msg 1 ;; # Failed to start
+                  esac
+                  ;;
+              *)
+                  # Failed to stop
+                  log_end_msg 1
+                  ;;
+          esac
+          ;;
+      run)
+          echo -n "\"service mopidy run\" is deprecated. " 1>&2
+          echo "Use \"mopidyctl\" instead." 1>&2
+          /usr/sbin/mopidyctl $@
+          ;;
+      *)
+          echo "Usage: $SCRIPTNAME {start|stop|status|restart|force-reload|run}" >&2
+          exit 3
+          ;;
+  esac
+  :
+  ```
+  - Make it executable with `chmod +x /etc/init.d/c_mopidy` and enable defaults with `update-rc.d c_mopidy defaults`.
+- Create the 'mopidy' user and configure permissions:
+  ```
+  adduser mopidy
+  usermod -a -G audio mopidy
+  usermod -a -G audio pulse
+  ```
+- Configure PulseAudio:
+  - Edit `nano /etc/pulse/system.pa`.
+  - Add `load-module module-native-protocol-tcp auth-ip-acl=127.0.0.1 auth-anonymous=1` at the end.
+
+### 10. Final Steps
+- Create Mopidy configuration directory and file:
+  ```
+  mkdir /etc/mopidy
+  nano /etc/mopidy/mopidy.conf
+  ```
+  - Paste the provided configuration, save and exit:
+  ```
   [local]
   enabled = true
   data_dir = /var/lib/mopidy/local
@@ -160,24 +300,6 @@ This guide details the steps for installing WiiStream on your Nintendo Wii. Foll
   # HTTP request timeout in seconds
   timeout = 10
   ```
-  - Make it executable with `chmod +x /etc/init.d/c_mopidy` and enable defaults with `update-rc.d c_mopidy defaults`.
-- Create the 'mopidy' user and configure permissions:
-  ```
-  adduser mopidy
-  usermod -a -G audio mopidy
-  usermod -a -G audio pulse
-  ```
-- Configure PulseAudio:
-  - Edit `nano /etc/pulse/system.pa`.
-  - Add `load-module module-native-protocol-tcp auth-ip-acl=127.0.0.1 auth-anonymous=1` at the end.
-
-### 10. Final Steps
-- Create Mopidy configuration directory and file:
-  ```
-  mkdir /etc/mopidy
-  nano /etc/mopidy/mopidy.conf
-  ```
-  - Paste the provided configuration, save and exit.
 - Modify system behavior for shutdown in `nano /etc/inittab`.
   - Change the line starting with 'ca:12345:ctrlaltdel' as instructed.
 - Power off the Wii to apply changes.
