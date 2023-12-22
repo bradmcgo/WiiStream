@@ -31,6 +31,7 @@ This guide details the steps for installing WiiStream on your Nintendo Wii. Foll
   - Select the partition named "WII-LINUX-NGX" (usually the middle partition).
   - Click 'Expand', follow the prompts, select 'Expand Now', and wait for completion.
     - Ignore the prompt about 'reinit your bootloader'.
+  - Remove the SD card from your PC.
 
 ### 3. Wii Setup
 - Connect a USB keyboard to the back of the Wii, using the USB port at the bottom when the Wii is horizontal.
