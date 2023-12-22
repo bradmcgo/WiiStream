@@ -22,7 +22,7 @@ This guide details the steps for installing WiiStream on your Nintendo Wii. Foll
 - Insert the SD card into your PC.
 
 #### On Windows:
-- Open Rufus from [here](https://rufus.ie/en/). 
+- Open Rufus [available here](https://rufus.ie/en/). 
   - Select your SD card under 'Device'.
   - Under 'Boot selection', click 'SELECT' and choose the extracted "wii-jessie-sd.img" file.
   - Click 'START' and accept the warning prompt.
