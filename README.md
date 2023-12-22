@@ -49,6 +49,7 @@ This guide details the steps for installing WiiStream on your Nintendo Wii. Foll
   - Change all instances of 'wlan0' to 'wlan1'.
   - Save and exit (Ctrl-X, Y, Enter).
 - Activate the new interface by typing `ifup wlan1`.
+- Type in `nano /etc/apt/source.list` and change the first line to 'archive.debian.org...' instead of 'httpredir.debian.org...' 
 
 ### 5. Remote Access Setup
 - Modify SSH settings with `nano /etc/ssh/sshd_config`.
