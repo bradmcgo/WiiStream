@@ -313,7 +313,7 @@ This guide details the steps for installing WiiStream on your Nintendo Wii. Foll
   ```
     ca:12345:ctrlaltdel:/sbin/shutdown -t1 -a -h now
   ```
-- Reboot the Wii to apply changes.
+- Reboot the Wii to apply changes by typing `reboot`.
 
 ## Starting Mopidy
 Power on the Wii to start the Mopidy music server.
