@@ -54,7 +54,7 @@ This guide details the steps for installing WiiStream on your Nintendo Wii. Foll
 - Modify SSH settings with `nano /etc/ssh/sshd_config`.
   - In the file, change 'PermitRootLogin without-password' to 'PermitRootLogin yes'.
 - Reboot the Wii by typing `reboot`, then log back in.
-- Use `ifconfig` to find the Wii's IP address (noted under 'wlan1 inet addr').
+- Type `ifconfig` to find the Wii's IP address (noted under 'wlan1 inet addr').
 
 ### 6. Access Wii from Another Computer
 - On another computer, access the Wii via terminal: `ssh root@<Wii's IP address>`.
