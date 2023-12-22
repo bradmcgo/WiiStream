@@ -57,7 +57,8 @@ This guide details the steps for installing WiiStream on your Nintendo Wii. Foll
 - Type `ifconfig` to find the Wii's IP address (noted under 'wlan1 inet addr').
 
 ### 6. Access Wii from Another Computer
-- On another computer, access the Wii via terminal: `ssh root@<Wii's IP address>`.
+- On another computer, access the Wii via a terminal:
+  - Type in `ssh root@<Wii's IP address>`.
   - The password is 'root' (input is invisible).
 
 ### 7. Create Swap File
