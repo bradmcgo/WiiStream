@@ -46,7 +46,7 @@ This guide details the steps for installing WiiStream on your Nintendo Wii. Foll
   - Select 'Yes' when prompted to bring up your WiFi connection.
   - Select 'No' after it fails to bring the connection up.
 - Edit network interfaces with `nano /etc/network/interfaces`.
-  - Change 'wlan0' to 'wlan1'.
+  - Change all instances of 'wlan0' to 'wlan1'.
   - Save and exit (Ctrl-X, Y, Enter).
 - Activate the new interface by typing `ifup wlan1`, then type `reboot`.
 
