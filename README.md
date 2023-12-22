@@ -304,8 +304,15 @@ This guide details the steps for installing WiiStream on your Nintendo Wii. Foll
   timeout = 10
   ```
 - Modify system behavior for shutdown in `nano /etc/inittab`.
-  - Change the line starting with 'ca:12345:ctrlaltdel' as instructed.
-- Power off the Wii to apply changes.
+  - Change the line starting with 'ca:12345:ctrlaltdel' from:
+  ```
+    ca:12345:ctrlaltdel:/sbin/shutdown -t1 -a -r now
+  ```
+  to
+  ```
+    ca:12345:ctrlaltdel:/sbin/shutdown -t1 -a -h now
+  ```
+- Reboot the Wii to apply changes.
 
 ## Starting Mopidy
 Power on the Wii to start the Mopidy music server.
