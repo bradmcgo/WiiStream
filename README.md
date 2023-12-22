@@ -303,7 +303,8 @@ This guide details the steps for installing WiiStream on your Nintendo Wii. Foll
   # HTTP request timeout in seconds
   timeout = 10
   ```
-- Modify system behavior for shutdown in `nano /etc/inittab`.
+- All the Reset button on the Wii to shut it down.
+- In `nano /etc/inittab`:
   - Change the line starting with 'ca:12345:ctrlaltdel' from:
   ```
     ca:12345:ctrlaltdel:/sbin/shutdown -t1 -a -r now
