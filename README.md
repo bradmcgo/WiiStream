@@ -121,12 +121,12 @@ This guide details the steps for installing WiiStream on your Nintendo Wii. Foll
   start_pulseaudio() {
         # Start pulseaudio in system-wide mode
         /usr/bin/pulseaudio --system --daemonize >> /var$
-        sleep 5  # Give pulseaudio a couple of seconds to initialize
+        sleep 5  # Give pulseaudio 5 seconds to initialize
   }
   
   do_start()
   {
-      start_pulseaudio # Add this line to ensure pulseaudio is running before starting mopidy
+      start_pulseaudio # Ensure pulseaudio is running before starting mopidy
   
       start-stop-daemon --start --quiet --name $NAME --pidfile $PIDFILE \
           --startas $DAEMON --test > /dev/null \
@@ -137,7 +137,6 @@ This guide details the steps for installing WiiStream on your Nintendo Wii. Foll
           >> /var/log/mopidy.log 2>&1 \
           || return 2
       sleep 5
-      #killall pulseaudio #For some reason, audio seems to have issues when started in system-wide mode. Pulseaudio will autospawn when playing something in Mopidy after its killed by this command. Audio will then function as expected.
   }
   
   do_stop()
