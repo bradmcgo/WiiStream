@@ -214,6 +214,9 @@ This guide details the steps for installing WiiStream on your Nintendo Wii. Foll
 - Create the 'mopidy' user and configure permissions:
   ```
   adduser mopidy
+  ```
+  Use any password. Leave the remaining fields blank during this step.
+  ```
   usermod -a -G audio mopidy
   usermod -a -G audio pulse
   ```
